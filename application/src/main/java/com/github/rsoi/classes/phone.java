@@ -2,17 +2,108 @@ package com.github.rsoi.classes;
 interface work{
 
     void print();
-    void compare();
+
 }
 
 public class phone implements work {
+    private String name;
+    private int RAM;
+    private String size;
+    private boolean SDCard;
+    private int minPrice;
+    private int maxPrice;
+
+    private int counerForCompare;
+
     @Override
     public void print() {
-
+        System.out.println("--------------------------------");
+        System.out.println("Название телефона: "+ name);
+        System.out.println("Размер телефона: "+ size);
+        System.out.println("Количество RAM: "+ RAM);
+        if (SDCard){
+        System.out.println("Наличие SD-карты: Да");
+        }
+        if (!SDCard){
+            System.out.println("Наличие SD-карты: Нет");
+        }
+        System.out.println("Цена: "+minPrice+" - "+maxPrice+" рублей.");
+        System.out.println("--------------------------------");
     }
 
-    @Override
-    public void compare() {
 
+    public void compare(int RAMC, String sizeS, boolean SDCardC, int maxPriceC, int minPriceC) {
+        counerForCompare=0;
+        if (RAMC==this.RAM)
+        {counerForCompare++;}
+        if (sizeS.equals(this.size))
+        {counerForCompare++;}
+        if (SDCardC==this.SDCard)
+        {counerForCompare++;}
+    }
+
+    public phone(String name, int RAM, String size, boolean SDCard, int minPrice, int maxPrice) {
+        this.name = name;
+        this.RAM = RAM;
+        this.size = size;
+        this.SDCard = SDCard;
+        this.minPrice = minPrice;
+        this.maxPrice = maxPrice;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getRAM() {
+        return RAM;
+    }
+
+    public void setRAM(int RAM) {
+        this.RAM = RAM;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public boolean isSDCard() {
+        return SDCard;
+    }
+
+    public void setSDCard(boolean SDCard) {
+        this.SDCard = SDCard;
+    }
+
+    public int getMinPrice() {
+        return minPrice;
+    }
+
+    public void setMinPrice(int minPrice) {
+        this.minPrice = minPrice;
+    }
+
+    public int getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(int maxPrice) {
+        this.maxPrice = maxPrice;
+    }
+
+    public int getCounerForCompare() {
+        return counerForCompare;
+    }
+
+    public void setCounerForCompare(int counerForCompare) {
+        this.counerForCompare = counerForCompare;
     }
 }
