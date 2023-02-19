@@ -8,7 +8,7 @@ interface work{
 public class phone implements work {
     private String name;
     private int RAM;
-    private String size;
+    private double size;
     private boolean SDCard;
     private int minPrice;
     private int maxPrice;
@@ -32,17 +32,17 @@ public class phone implements work {
     }
 
 
-    public void compare(int RAMC, String sizeS, boolean SDCardC, int maxPriceC, int minPriceC) {
+    public void compare(int RAMC, double sizeS, boolean SDCardC) {
         counerForCompare=0;
-        if (RAMC==this.RAM)
+        if (this.RAM==RAMC)
         {counerForCompare++;}
-        if (sizeS.equals(this.size))
+        if (this.size==sizeS)
         {counerForCompare++;}
-        if (SDCardC==this.SDCard)
+        if (this.SDCard==SDCardC)
         {counerForCompare++;}
     }
 
-    public phone(String name, int RAM, String size, boolean SDCard, int minPrice, int maxPrice) {
+    public phone(String name, int RAM, double size, boolean SDCard, int minPrice, int maxPrice) {
         this.name = name;
         this.RAM = RAM;
         this.size = size;
@@ -67,11 +67,11 @@ public class phone implements work {
         this.RAM = RAM;
     }
 
-    public String getSize() {
+    public double getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(double size) {
         this.size = size;
     }
 
