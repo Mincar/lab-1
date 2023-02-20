@@ -13,7 +13,7 @@ public class phone implements work {
     private int minPrice;
     private int maxPrice;
 
-    private int counerForCompare;
+    private int counterForCompare;
 
     @Override
     public void print() {
@@ -30,17 +30,6 @@ public class phone implements work {
         System.out.println("Цена: "+minPrice+" - "+maxPrice+" рублей.");
         System.out.println("--------------------------------");
     }
-
-
-    /*public void compare(int RAMC, double sizeS, boolean SDCardC) {
-        counerForCompare=0;
-        if (this.RAM==RAMC)
-        {counerForCompare++;}
-        if (this.size==sizeS)
-        {counerForCompare++;}
-        if (this.SDCard==SDCardC)
-        {counerForCompare++;}
-    }*/
 
     public phone(String name, int RAM, double size, boolean SDCard, int minPrice, int maxPrice) {
         this.name = name;
@@ -99,11 +88,11 @@ public class phone implements work {
         this.maxPrice = maxPrice;
     }
 
-    public int getCounerForCompare() {
-        return counerForCompare;
+    public int getCounterForCompare() {
+        return counterForCompare;
     }
 
-    public void setCounerForCompare(int counerForCompare) {
-        this.counerForCompare = counerForCompare;
+    public void setCounterForCompare(int counerForCompare) {
+        this.counterForCompare = counerForCompare;
     }
 }
