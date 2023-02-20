@@ -1,4 +1,4 @@
-package com.github.rsoi.classes;
+package com.github.rsoi.domain;
 interface work{
 
     void print();
@@ -32,7 +32,7 @@ public class phone implements work {
     }
 
 
-    public void compare(int RAMC, double sizeS, boolean SDCardC) {
+    /*public void compare(int RAMC, double sizeS, boolean SDCardC) {
         counerForCompare=0;
         if (this.RAM==RAMC)
         {counerForCompare++;}
@@ -40,7 +40,7 @@ public class phone implements work {
         {counerForCompare++;}
         if (this.SDCard==SDCardC)
         {counerForCompare++;}
-    }
+    }*/
 
     public phone(String name, int RAM, double size, boolean SDCard, int minPrice, int maxPrice) {
         this.name = name;

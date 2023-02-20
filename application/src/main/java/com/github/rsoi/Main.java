@@ -1,9 +1,9 @@
 package com.github.rsoi;
-
+import com.github.rsoi.service.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.github.rsoi.classes.phone;
+import com.github.rsoi.domain.phone;
 
 public class Main {
 	public static void main(String[] args) {
@@ -118,10 +118,12 @@ public class Main {
 
 					System.out.println(ram+" "+ size+" "+sd+" "+ minP+" "+ maxP);
 
+					CompareClass cl = new CompareClass();
 
 					for(phone phoneO: phoneArrayList)
 					{
-						phoneO.compare(ram, size, sd);
+						cl.compare(phoneO,ram, size, sd);
+						//phoneO.compare(ram, size, sd);
 					}
 
 					for(phone phoneO: phoneArrayList)
