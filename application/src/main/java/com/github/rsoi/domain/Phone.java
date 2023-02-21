@@ -1,11 +1,12 @@
 package com.github.rsoi.domain;
-interface work{
+
+interface work {
 
     void print();
 
 }
 
-public class phone implements work {
+public class Phone implements work {
     private String name;
     private int RAM;
     private double size;
@@ -18,20 +19,20 @@ public class phone implements work {
     @Override
     public void print() {
         System.out.println("--------------------------------");
-        System.out.println("Название телефона: "+ name);
-        System.out.println("Размер телефона: "+ size);
-        System.out.println("Количество RAM: "+ RAM);
-        if (SDCard){
-        System.out.println("Наличие SD-карты: Да");
+        System.out.println("Название телефона: " + name);
+        System.out.println("Размер телефона: " + size);
+        System.out.println("Количество RAM: " + RAM);
+        if (SDCard) {
+            System.out.println("Наличие SD-карты: Да");
         }
-        if (!SDCard){
+        if (!SDCard) {
             System.out.println("Наличие SD-карты: Нет");
         }
-        System.out.println("Цена: "+minPrice+" - "+maxPrice+" рублей.");
+        System.out.println("Цена: " + minPrice + " - " + maxPrice + " рублей.");
         System.out.println("--------------------------------");
     }
 
-    public phone(String name, int RAM, double size, boolean SDCard, int minPrice, int maxPrice) {
+    public Phone(String name, int RAM, double size, boolean SDCard, int minPrice, int maxPrice) {
         this.name = name;
         this.RAM = RAM;
         this.size = size;
