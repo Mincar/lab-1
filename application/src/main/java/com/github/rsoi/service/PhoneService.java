@@ -2,86 +2,24 @@ package com.github.rsoi.service;
 
 import com.github.rsoi.domain.Phone;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
-
-import java.util.Scanner;
-import com.github.rsoi.repository.PhonesRepository;
 import org.springframework.transaction.annotation.Transactional;
+import com.github.rsoi.repository.PhonesRepository;
+import java.util.Scanner;
 
 @Service
 @RequiredArgsConstructor
-public class PhoneComparator implements Work {
+public class PhoneService {
+    private final  PhonesRepository phonesRepository;
     private int ram = 0;
     private double size = 0;
     private boolean sd = false;
     private int minP = 0;
     private int maxP = 0;
-
-    private final  PhonesRepository phonesRepository;
-
-    public void compare(Phone phoneC, int RAMC, double sizeS, boolean SDCardC) {
-        int counterForCompare = 0;
-        phoneC.setCounterForCompare(counterForCompare);
-        if (phoneC.getRAM() == RAMC) {
-            counterForCompare++;
-        }
-        if (phoneC.getSize() == sizeS) {
-            counterForCompare++;
-        }
-        if (phoneC.isSDCard() == SDCardC) {
-            counterForCompare++;
-        }
-        phoneC.setCounterForCompare(counterForCompare);
-    }
-
-    public void comparePhones() {
-        int counter = 0;
-
-        var phones= phonesRepository.findAll();
-        for (Phone phoneO : phones) {
-            compare(phoneO, ram, size, sd);
-
-        }
-
-        for (Phone phoneO : phones) {
-            int i = phoneO.getCounterForCompare();
-            if (i > counter) {
-                counter = i;
-            }
-        }
-        if (counter == 0) {
-            System.out.println("По вашему запросу ничего не найдено");
-            return;
-        }
-        System.out.println(counter);
-        int tel = 0;
-        for (Phone phoneO : phones) {
-            int i = phoneO.getCounterForCompare();
-            int min = phoneO.getMinPrice();
-            int max = phoneO.getMaxPrice();
-            if (i == counter && ((min > minP && min < maxP) || (max < maxP && max > minP))) {
-                tel++;
-                phoneO.print();
-            }
-        }
-        if (tel == 0) {
-            System.out.println("По вашему запросу ничего не найдено");
-        }
-
-
-    }
-
-    @Override
-    public void printAll()
-    {  var phones= phonesRepository.findAll();
-        for(Phone phoneO: phones)
-        {
-            phoneO.print();
-        }
-    }
-
-    public void changeValues() {
+    @Transactional
+    public void addPhone()
+    {   Scanner scan = new Scanner(System.in);
+        String name;
         String s;
         int number;
         double numberD;
@@ -90,8 +28,8 @@ public class PhoneComparator implements Work {
         sd = false;
         minP = -1;
         maxP = -1;
-        Scanner scan = new Scanner(System.in);
-
+        System.out.println("Введите название телефона");
+        name = scan.next();
         do {
             System.out.println("Введите количество памяти");
             s = scan.next();
@@ -157,7 +95,44 @@ public class PhoneComparator implements Work {
             maxP = minP;
             minP = t;
         }
+        phonesRepository.save(new Phone(name, ram, size,sd,minP,maxP));
+        System.out.println("Добавлено");
+    }
+    @Transactional
+    public void deletePhone()
+    {   Scanner scan = new Scanner(System.in);
+        String s;
+        long id=-1;
+        do {
+            System.out.println("Введите id");
+            s = scan.next();
+            try {
+                id = Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                System.out.println("Неверный ввод");
+            }
+        } while (id < 0);
+        phonesRepository.deleteById(id);
+        System.out.println("Удалено");
+    }
 
-
+    public void updatePhone()
+    {
+        Scanner scan = new Scanner(System.in);
+        String s;
+        long id=-1;
+        do {
+            System.out.println("Введите id");
+            s = scan.next();
+            try {
+                id = Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                System.out.println("Неверный ввод");
+            }
+        } while (id < 0);
+        var update= phonesRepository.findById(id).orElseThrow();
+        update.setName("новое название");
+        phonesRepository.save(update);
+        System.out.println("Обновлено");
     }
 }
