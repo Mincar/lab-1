@@ -5,15 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
-import com.github.rsoi.repository.PhonesRepository;
 
 
 @Service
 @RequiredArgsConstructor
 public class PhoneComparator {
-
-
-    private final  PhonesRepository phonesRepository;
+    private final PhoneService phoneService;
 
     public void compare(Phone phoneC, int RAMC, double sizeS, boolean SDCardC) {
         int counterForCompare = 0;
@@ -34,7 +31,7 @@ public class PhoneComparator {
         List<Phone> phoneList =new ArrayList<>();
         int counter = 0;
         boolean sd=false;
-        var phones= phonesRepository.findAll();
+        var phones= phoneService.phoneList();
         if (sdStr.equals("да")) {
             sd = true;
         }
@@ -70,7 +67,6 @@ public class PhoneComparator {
             System.out.println("По вашему запросу ничего не найдено");
         }
         return phoneList;
-
     }
 
 }
