@@ -2,21 +2,60 @@ package com.github.rsoi.service;
 
 import com.github.rsoi.domain.Phone;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.github.rsoi.repository.PhonesRepository;
-import java.util.Scanner;
+
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PhoneService {
     private final  PhonesRepository phonesRepository;
+
+    @Transactional
+    public Phone findById(long id)
+        {
+           return phonesRepository.findById(id).orElseThrow();
+        }
+
+
+    @Transactional
+    public List<Phone> phoneList()
+    {
+        return phonesRepository.findAll();
+    }
+    @Transactional
+    public void savePhone(Phone phone)
+    {
+        log.info("Saving new {}", phone);
+        phonesRepository.save(phone);
+    }
+    @Transactional
+    public void deletePhoneById(Long id)
+    {
+        phonesRepository.deleteById(id);
+    }
+
+
+
+
+}
+
+
+/*
+
     private int ram = 0;
     private double size = 0;
     private boolean sd = false;
     private int minP = 0;
     private int maxP = 0;
-    @Transactional
+
+
+@Transactional
     public void addPhone()
     {   Scanner scan = new Scanner(System.in);
         String name;
@@ -135,4 +174,7 @@ public class PhoneService {
         phonesRepository.save(update);
         System.out.println("Обновлено");
     }
-}
+
+
+
+ */

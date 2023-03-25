@@ -1,39 +1,43 @@
 package com.github.rsoi;
-import com.github.rsoi.repository.PhonesRepository;
-import com.github.rsoi.service.*;
-
-import java.util.Scanner;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 
 @SpringBootApplication
-public class Main implements CommandLineRunner {
+public class Main {
 
-	private final PhoneService phoneService;
-	private final PhonesRepository phonesRepository;
-	@Autowired
-	public Main(PhoneService phoneService, PhonesRepository phonesRepository) {
-		this.phoneService = phoneService;
-		this.phonesRepository= phonesRepository;
-	}
 	public static void main(String[] args) {
 
 		SpringApplication.run(Main.class, args);
 	}
 
-	@Override
+}
+
+/*
+	private final PhoneService phoneService;
+
+	private final PhoneComparator phoneComparator;
+	@Autowired
+	public Main(PhoneService phoneService,PhoneComparator phoneComparator) {
+		this.phoneService = phoneService;
+		this.phoneComparator = phoneComparator;
+	}*/
+
+/*List<Phone> phones = new ArrayList<>();
+		phones.add(new Phone("Телефон 1", 8, 6.1, true,100, 180));
+		phones.add(new Phone("Телефон 2", 16, 6.1, true,180, 250));
+		phones.add(new Phone("Телефон 3", 8, 6.2, false,130, 150));
+		phones.add(new Phone("Телефон 4", 4, 6.4, false,50, 150));
+		phones.add(new Phone("Телефон 5", 4, 6.1, true,70, 130));*/
+
+
+	/*@Override
 	public void run(String... args) throws Exception {
 
 		Scanner sc = new Scanner(System.in);
 		int number = 0;
 		String s;
-		PhoneComparator cl = new PhoneComparator(phonesRepository);
-
 
 		while (number!=6)
 		{
@@ -52,11 +56,11 @@ public class Main implements CommandLineRunner {
 			switch (number)
 			{
 				case 1:
-					cl.printAll();
+					phoneComparator.printAll();
 					break;
 				case 2:
-					cl.changeValues();
-					cl.comparePhones();
+					phoneComparator.changeValues();
+					phoneComparator.comparePhones();
 					break;
 				case 3:
 					phoneService.addPhone();
@@ -73,14 +77,4 @@ public class Main implements CommandLineRunner {
 			}
 
 		}
-	}
-}
-
-
-
-/*List<Phone> phones = new ArrayList<>();
-		phones.add(new Phone("Телефон 1", 8, 6.1, true,100, 180));
-		phones.add(new Phone("Телефон 2", 16, 6.1, true,180, 250));
-		phones.add(new Phone("Телефон 3", 8, 6.2, false,130, 150));
-		phones.add(new Phone("Телефон 4", 4, 6.4, false,50, 150));
-		phones.add(new Phone("Телефон 5", 4, 6.1, true,70, 130));*/
+	}*/

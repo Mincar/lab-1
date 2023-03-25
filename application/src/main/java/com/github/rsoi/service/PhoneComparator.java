@@ -2,21 +2,16 @@ package com.github.rsoi.service;
 
 import com.github.rsoi.domain.Phone;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
-
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 import com.github.rsoi.repository.PhonesRepository;
-import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 @RequiredArgsConstructor
-public class PhoneComparator implements Work {
-    private int ram = 0;
-    private double size = 0;
-    private boolean sd = false;
-    private int minP = 0;
-    private int maxP = 0;
+public class PhoneComparator {
+
 
     private final  PhonesRepository phonesRepository;
 
@@ -35,15 +30,18 @@ public class PhoneComparator implements Work {
         phoneC.setCounterForCompare(counterForCompare);
     }
 
-    public void comparePhones() {
+    public List<Phone> comparePhones(int ram, double size, String sdStr, int minP, int maxP) {
+        List<Phone> phoneList =new ArrayList<>();
         int counter = 0;
-
+        boolean sd=false;
         var phones= phonesRepository.findAll();
+        if (sdStr.equals("да")) {
+            sd = true;
+        }
         for (Phone phoneO : phones) {
             compare(phoneO, ram, size, sd);
 
         }
-
         for (Phone phoneO : phones) {
             int i = phoneO.getCounterForCompare();
             if (i > counter) {
@@ -52,10 +50,12 @@ public class PhoneComparator implements Work {
         }
         if (counter == 0) {
             System.out.println("По вашему запросу ничего не найдено");
-            return;
+            return phoneList;
         }
         System.out.println(counter);
         int tel = 0;
+
+
         for (Phone phoneO : phones) {
             int i = phoneO.getCounterForCompare();
             int min = phoneO.getMinPrice();
@@ -63,25 +63,32 @@ public class PhoneComparator implements Work {
             if (i == counter && ((min > minP && min < maxP) || (max < maxP && max > minP))) {
                 tel++;
                 phoneO.print();
+                phoneList.add(phoneO);
             }
         }
         if (tel == 0) {
             System.out.println("По вашему запросу ничего не найдено");
         }
-
+        return phoneList;
 
     }
 
-    @Override
-    public void printAll()
-    {  var phones= phonesRepository.findAll();
-        for(Phone phoneO: phones)
-        {
-            phoneO.print();
-        }
-    }
+}
 
-    public void changeValues() {
+
+
+
+
+
+  /*
+    private int ram = 0;
+    private double size = 0;
+    private boolean sd = false;
+    private int minP = 0;
+    private int maxP = 0;
+
+
+  public void changeValues() {
         String s;
         int number;
         double numberD;
@@ -160,4 +167,13 @@ public class PhoneComparator implements Work {
 
 
     }
-}
+      public void printAll()
+    {  var phones= phonesRepository.findAll();
+        for(Phone phoneO: phones)
+        {
+            phoneO.print();
+        }
+    }
+
+
+    */

@@ -6,13 +6,14 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "phonelist")
 public class Phone {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
     @Column(name = "id")
-    Long id;
+    private Long id;
     @Column(name = "name")private String name;
     @Column(name = "ram") private int RAM;
     @Column(name = "size") private double size;
@@ -46,5 +47,15 @@ public class Phone {
         this.maxPrice = maxPrice;
     }
 
+  /*  public boolean isSDCard() {
+        return SDCard;
+    }
+
+    public String getSDCard()
+    {
+        boolean sd= this.isSDCard();
+        if (sd){
+        return "да"; } else {return "нет";}
+    }*/
 
 }
