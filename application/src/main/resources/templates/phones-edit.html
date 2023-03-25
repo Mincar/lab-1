@@ -39,7 +39,7 @@
         </div>
         <div class="form-group col-2">
             <label for="size" th:text="Размер">Размер</label>
-            <input type="number" required th:value="${phone.getSize}" oninput="up(this)"  class="form-control" id="size" name="size" >
+            <input type="number" required th:value="${phone.getSize}" oninput="up(this)"  class="form-control" id="size" name="size" step="0.1" min="1">
 
         </div>
         <div class="form-group col-2">

@@ -1,7 +1,6 @@
 package com.github.rsoi.controller;
 
 import com.github.rsoi.domain.Phone;
-import com.github.rsoi.repository.PhonesRepository;
 import com.github.rsoi.service.PhoneComparator;
 import com.github.rsoi.service.PhoneService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,6 @@ public class MainController {
 
     private final PhoneComparator phoneComparator;
     private final PhoneService phoneService;
-    private final PhonesRepository phonesRepository;
 
     @GetMapping("/")
     public String greeting() {
@@ -67,7 +65,7 @@ public class MainController {
 
     @GetMapping("/phones/{id}/edit")
     public String phoneEdit(Model model, @PathVariable(value = "id") long id) {
-        if(!phonesRepository.existsById(id))
+        if(!phoneService.existsById(id))
         {
             return "redirect:/phones";
         }

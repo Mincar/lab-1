@@ -22,6 +22,11 @@ public class PhoneService {
            return phonesRepository.findById(id).orElseThrow();
         }
 
+    @Transactional
+    public boolean existsById(long id)
+    {
+        return phonesRepository.existsById(id);
+    }
 
     @Transactional
     public List<Phone> phoneList()
@@ -39,8 +44,6 @@ public class PhoneService {
     {
         phonesRepository.deleteById(id);
     }
-
-
 
 
 }
@@ -174,7 +177,4 @@ public class PhoneService {
         phonesRepository.save(update);
         System.out.println("Обновлено");
     }
-
-
-
  */

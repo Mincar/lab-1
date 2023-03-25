@@ -35,7 +35,7 @@
             <input type="number" required class="form-control" id="ram" name="ram" min="1">
 
             <label for="size" th:text="Размер">Размер</label>
-            <input type="number" required oninput="up(this)"  class="form-control" id="size" name="size" step="any">
+            <input type="number" required oninput="up(this)"  class="form-control" id="size" name="size" step="0.1" min="1">
 
 
             <label for="sdCard" th:text="Наличие_SD-карты">Наличие SD-карты</label>
@@ -102,4 +102,11 @@
 </div>
 
 </body>
+<script>
+    function up(e) {
+        if (e.value.indexOf(".") != '-1') {
+            e.value=e.value.substring(0, e.value.indexOf(".") + 2);
+        }
+    }
+</script>
 </html>
