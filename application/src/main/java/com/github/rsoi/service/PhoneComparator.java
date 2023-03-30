@@ -1,4 +1,4 @@
-package com.github.rsoi.service;
+/*package com.github.rsoi.service;
 
 import com.github.rsoi.domain.Phone;
 import lombok.RequiredArgsConstructor;
@@ -72,7 +72,7 @@ public class PhoneComparator {
 }
 
 
-
+*/
 
 
 

@@ -3,6 +3,7 @@ package com.github.rsoi.service;
 import com.github.rsoi.domain.Phone;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.github.rsoi.repository.PhonesRepository;
@@ -45,6 +46,18 @@ public class PhoneService {
         phonesRepository.deleteById(id);
     }
 
+
+    @Transactional
+    @Modifying
+    public List<Phone> findAndCompareByParams (int ram, double size, boolean sdcard, int min, int max){
+        phonesRepository.increaseCounterForCompareWhereRam(ram);
+        phonesRepository.increaseCounterForCompareWhereSize(size);
+        phonesRepository.increaseCounterForCompareWhereSDCard(sdcard);
+        List <Phone> p =phonesRepository.findPhonesByParams(min, max);
+        log.info("Find {}", p);
+        phonesRepository.setCounterForCompareZero();
+        return p;
+    }
 
 }
 

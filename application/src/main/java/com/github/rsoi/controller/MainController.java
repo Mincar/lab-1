@@ -1,15 +1,11 @@
 package com.github.rsoi.controller;
 
 import com.github.rsoi.domain.Phone;
-import com.github.rsoi.service.PhoneComparator;
 import com.github.rsoi.service.PhoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +14,13 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 public class MainController {
-
-    private final PhoneComparator phoneComparator;
     private final PhoneService phoneService;
 
     @GetMapping("/")
     public String greeting() {
         return "main";
     }
+
 
     @GetMapping("/phones")
     public String phones(Model model, @RequestParam(name = "method", required = false) String method,
@@ -37,6 +32,16 @@ public class MainController {
         model.addAttribute("phones", phoneService.phoneList());
         return "phones";
     }
+  /*  @DeleteMapping ("/phones/{id}")
+    public String deletePhone(@RequestParam(name = "id", required = false) Long id) {
+
+        if (id != null ) {
+            phoneService.deletePhoneById(id);
+        }
+
+        return "redirect:/phones";
+    }*/
+
     @PostMapping("/phones/addPhone")
     public String phoneAdd( @RequestParam("name") String name,
                                  @RequestParam("ram") int ram,
@@ -77,7 +82,7 @@ public class MainController {
         return "phones-edit";
     }
 
-    @PostMapping("/phones/{id}/edit")
+    @PostMapping ("/phones/{id}/edit")
     public String phoneUpdate( @PathVariable(value = "id") long id,
                                @RequestParam("name") String name,
                             @RequestParam("ram") int ram,
@@ -123,7 +128,17 @@ public class MainController {
             @RequestParam("minPrice") int minPrice,
             @RequestParam("maxPrice") int maxPrice, Model model
     ) { String result;
-        List<Phone> phones = phoneComparator.comparePhones(ram, size, sdCard, minPrice, maxPrice);
+        boolean SDCard=false;
+        if (maxPrice < minPrice) {
+            int t;
+            t = maxPrice;
+            maxPrice = minPrice;
+            minPrice = t;
+        }
+        if (sdCard.equals("да")) {
+            SDCard = true;
+        }
+        List<Phone> phones = phoneService.findAndCompareByParams(ram, size, SDCard, minPrice, maxPrice);
         if(phones.isEmpty()){
             result="Ничего не найдено";
         }
