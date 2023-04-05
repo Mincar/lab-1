@@ -2,6 +2,7 @@ package com.github.rsoi.controller;
 
 import com.github.rsoi.domain.Phone;
 import com.github.rsoi.service.PhoneService;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,8 @@ public class MainController {
 
         if (method != null && id != null && method.equals("delete")) {
             phoneService.deletePhoneById(id);
+            model.addAttribute("phones", phoneService.phoneList());
+            return "redirect:/phones";
         }
         model.addAttribute("phones", phoneService.phoneList());
         return "phones";
@@ -48,7 +51,7 @@ public class MainController {
                                  @RequestParam("size") double size,
                                  @RequestParam("sdCard") String sdCard,
                                  @RequestParam("minPrice") int minPrice,
-                                 @RequestParam("maxPrice") int maxPrice
+                                 @RequestParam("maxPrice") int maxPrice, @RequestParam("picture") String pictureURL
                                  ) {
         boolean SDCard=false;
         if (maxPrice < minPrice) {
@@ -62,7 +65,7 @@ public class MainController {
         }
 
 
-        phoneService.savePhone(new Phone(name,ram,size,SDCard,minPrice,maxPrice));
+        phoneService.savePhone(new Phone(name,ram,size,SDCard,minPrice,maxPrice, pictureURL));
         return "redirect:/phones";
     }
 
@@ -89,7 +92,7 @@ public class MainController {
                             @RequestParam("size") double size,
                             @RequestParam("sdCard") String sdCard,
                             @RequestParam("minPrice") int minPrice,
-                            @RequestParam("maxPrice") int maxPrice
+                            @RequestParam("maxPrice") int maxPrice, @RequestParam("picture") String pictureURL
     ) {
         boolean SDCard=false;
         if (maxPrice < minPrice) {
@@ -109,6 +112,7 @@ public class MainController {
         phone.setSDCard(SDCard);
         phone.setMinPrice(minPrice);
         phone.setMaxPrice(maxPrice);
+        phone.setPicURL(pictureURL);
 
         phoneService.savePhone(phone);
         return "redirect:/phones";

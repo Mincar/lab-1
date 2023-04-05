@@ -30,6 +30,7 @@
         <thead>
         <tr>
             <th scope="col" th:text="Id">Id</th>
+            <th scope="col" th:text="Изображение">Изображение</th>
             <th scope="col" th:text="Название">Название</th>
             <th scope="col" th:text="RAM">RAM</th>
             <th scope="col" th:text="Размер">Размер</th>
@@ -43,6 +44,7 @@
         <tbody>
         <tr th:each="phone : ${phones}">
             <th th:text="${phone.getId()}"></th>
+            <td><img height="120px" th:src="${phone.getPicURL()}" th:alt="Изображение_телефона"></td>
             <td th:text="${phone.getName()}"></td>
             <td th:text="${phone.getRAM()}"></td>
             <td th:text="${phone.getSize()}"></td>
@@ -86,11 +88,15 @@
             <div class="form-group col-2">
                 <label for="minPrice" th:text="Минимальная_цена">Минимальная цена</label>
                 <input type="number"   class="form-control" required id="minPrice" name="minPrice" min="1" step="1">
-            </div><div class="form-group col-2">
+            </div>
+            <div class="form-group col-2">
             <label for="maxPrice" th:text="Максимальная_цена">Максимальная цена</label>
             <input type="number"   class="form-control" required id="maxPrice" name="maxPrice" min="1" step="1">
-
         </div>
+            <div class="form-group col-2">
+                <label for="picture" th:text="Изображение_телефона_URL">Изображение телефона</label>
+                <input type="text" class="form-control" id="picture" name="picture">
+            </div>
         </div>
         <button type="submit" class="btn btn-primary" th:text="Добавить" >Добавить</button>
     </form>

@@ -53,11 +53,16 @@
         <div class="form-group col-2">
             <label for="minPrice" th:text="Минимальная_цена">Минимальная цена</label>
             <input type="number" required  th:value="${phone.getMinPrice}" class="form-control" id="minPrice" name="minPrice" min="1" step="1">
-        </div><div class="form-group col-2">
+        </div>
+        <div class="form-group col-2">
         <label for="maxPrice" th:text="Максимальная_цена">Максимальная цена</label>
         <input type="number" required th:value="${phone.getMaxPrice}"  class="form-control" id="maxPrice" name="maxPrice" min="1" step="1">
+        </div>
+        <div class="form-group col-2">
+            <label for="picture" th:text="Изображение_телефона_URL">Изображение телефона</label>
+            <input type="text" th:value="${phone.getPicURL()}" class="form-control" id="picture" name="picture">
+        </div>
 
-    </div>
     </div>
     <button type="submit" class="btn btn-primary" th:text="Обновить" >Обновить</button>
 

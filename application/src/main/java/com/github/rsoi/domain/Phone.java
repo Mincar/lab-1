@@ -21,7 +21,11 @@ public class Phone {
     @Column(name = "min_price") private int minPrice;
     @Column(name = "max_price") private int maxPrice;
 
-    private int counterForCompare=0;
+    private double counterForCompare=0;
+
+    @Column(name = "picurl") private String picURL;
+
+
 
     public void print() {
         System.out.println("--------------------------------");
@@ -47,7 +51,17 @@ public class Phone {
         this.maxPrice = maxPrice;
     }
 
-  /*  public boolean isSDCard() {
+    public Phone(String name, int RAM, double size, boolean SDCard, int minPrice, int maxPrice, String picURL) {
+        this.name = name;
+        this.RAM = RAM;
+        this.size = size;
+        this.SDCard = SDCard;
+        this.minPrice = minPrice;
+        this.maxPrice = maxPrice;
+        this.picURL = picURL;
+    }
+
+    /*  public boolean isSDCard() {
         return SDCard;
     }
 

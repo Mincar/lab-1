@@ -48,7 +48,6 @@ public class PhoneService {
 
 
     @Transactional
-    @Modifying
     public List<Phone> findAndCompareByParams (int ram, double size, boolean sdcard, int min, int max){
         phonesRepository.increaseCounterForCompareWhereRam(ram);
         phonesRepository.increaseCounterForCompareWhereSize(size);

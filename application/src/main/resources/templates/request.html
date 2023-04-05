@@ -53,6 +53,18 @@
 
     </div>
     </div>
+  <!--  <div class="form-row">
+        <div class="form-group col-2">
+            <label for="ram" th:text="Вес_RAM">Вес RAM</label>
+            <input type="number" required oninput="up(this)" class="form-control" id="weightOfRAM" name="weightOfRAM" min="0" th:value="1" step="0.1">
+
+            <label for="ram" th:text="Вес_размера">Вес размера</label>
+            <input type="number" required oninput="up(this)" class="form-control" id="weightOfSize" name="weightOfSize" min="0" th:value="1" step="0.1">
+
+            <label for="ram" th:text="Вес_СД-карты">Вес СД-карты</label>
+            <input type="number" required oninput="up(this)" class="form-control" id="weightOfSDCard" name="weightOfSDCard" min="0" th:value="1" step="0.1">
+        </div>
+    </div> -->
     <button type="submit" class="btn btn-primary" th:text="Найти" >Найти</button>
 </form>
 
@@ -67,6 +79,7 @@
     <thead>
     <tr>
         <th scope="col" th:text="Id">Id</th>
+        <th scope="col" th:text="Изображение">Изображение</th>
         <th scope="col" th:text="Название">Название</th>
         <th scope="col" th:text="RAM">RAM</th>
         <th scope="col" th:text="Размер">Размер</th>
@@ -79,6 +92,7 @@
     <tbody>
     <tr th:each="phone : ${phones}">
         <th th:text="${phone.getId()}"></th>
+        <td><img height="120px" th:src="${phone.getPicURL()}" th:alt="Изображение_телефона"></td>
         <td th:text="${phone.getName()}"></td>
         <td th:text="${phone.getRAM()}"></td>
         <td th:text="${phone.getSize()}"></td>
