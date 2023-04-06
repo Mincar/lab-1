@@ -3,10 +3,12 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.Objects;
+
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "phonelist")
 public class Phone {
     @Id
@@ -25,22 +27,6 @@ public class Phone {
 
     @Column(name = "picurl") private String picURL;
 
-
-
-    public void print() {
-        System.out.println("--------------------------------");
-        System.out.println("Название телефона: " + name);
-        System.out.println("Размер телефона: " + size);
-        System.out.println("Количество RAM: " + RAM);
-        if (SDCard) {
-            System.out.println("Наличие SD-карты: Да");
-        }
-        if (!SDCard) {
-            System.out.println("Наличие SD-карты: Нет");
-        }
-        System.out.println("Цена: " + minPrice + " - " + maxPrice + " рублей.");
-        System.out.println("--------------------------------");
-    }
 
     public Phone(String name, int RAM, double size, boolean SDCard, int minPrice, int maxPrice) {
         this.name = name;
@@ -61,15 +47,6 @@ public class Phone {
         this.picURL = picURL;
     }
 
-    /*  public boolean isSDCard() {
-        return SDCard;
-    }
 
-    public String getSDCard()
-    {
-        boolean sd= this.isSDCard();
-        if (sd){
-        return "да"; } else {return "нет";}
-    }*/
 
 }
